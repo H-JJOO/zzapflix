@@ -1,38 +1,101 @@
-.App {
-  text-align: center;
+.background {
+  background-color: black;
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.nav-item {
+  padding: 0 0.5rem;
+  cursor: pointer;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    color: #fff;
+    text-decoration: none;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.banner {
+  height: 900px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-repeat: no-repeat;
+}
+
+.banner::before {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 900px;
+
+  content: "";
+  background: linear-gradient(to right, black, transparent);
+}
+
+.banner-info {
+  width: 30%;
+  margin-left: 20px;
+  color: white;
+  z-index: 1;
+}
+
+.card {
+  margin: 50px;
+  width: 300px;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: black;
+}
+
+.overlay {
+  color: white;
+  opacity: 0;
+  transform: scale(1.2);
+}
+
+.overlay h1 {
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.card:hover .overlay {
+  opacity: 1;
+  background: rgba(43, 41, 41, 0.7);
+  width: 100%;
+  height: 100%;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+.detail {
+  padding: 90px;
+}
+
+.detail-title {
+  font-size: 30px;
+  font-weight: 100;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.detail-info2 {
+  font-size: 20px;
+  font-weight: 100;
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.detail-info2 > div > span {
+  margin: 2px;
+  width: 120px;
+}
+
+.detail-overview {
+  font-size: 20px;
+  font-weight: 100;
+  color: white;
 }
