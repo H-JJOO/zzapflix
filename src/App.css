@@ -99,3 +99,17 @@
   font-weight: 100;
   color: white;
 }
+
+.detail-button {
+  margin-top: 20px;
+}
+
+.reviews {
+  font-size: 20px;
+  font-weight: 100;
+  color: white;
+}
+
+.reviews-box {
+  border: 1px solid white;
+}

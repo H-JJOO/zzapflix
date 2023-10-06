@@ -8,7 +8,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 import gener from "../json/genreKey.json";
 
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
 const MovieDetail = () => {
   const genreList = gener.genres;
@@ -24,12 +24,12 @@ const MovieDetail = () => {
     dispatch(movieAction.getMovieDetail(id));
   }, []);
 
-  console.log("!!!movieDetail : ", movieDetail);
-  console.log("!!!movieReviews : ", movieReviews);
-
   if (loading) {
     return <ClipLoader color={"#ffff"} loading={loading} size={150} />;
   }
+
+  console.log("!!!movieDetail : ", movieDetail);
+  console.log("!!!movieReviews : ", movieReviews);
 
   return (
     <Container className="detail">
@@ -99,8 +99,24 @@ const MovieDetail = () => {
           </div>
           <hr style={{ color: "white" }} />
         </Col>
-        <Col xs={12} xl={12}>
-          TEST
+        <Col
+          xs={12}
+          xl={12}
+          style={{ marginTop: "20px", marginBottom: "20px" }}>
+          <Button variant="danger">REVIEWS</Button>{" "}
+          <Button variant="light">RELATED MOVIES</Button>{" "}
+        </Col>
+        <Col xs={12} xl={12} className="reviews-box">
+          {movieReviews.results &&
+            movieReviews.results.map((item) => {
+              return (
+                <div className="reviews">
+                  <h3>{item.author}</h3>
+                  <p>{item.content}</p>
+                  <hr></hr>
+                </div>
+              );
+            })}
         </Col>
       </Row>
     </Container>

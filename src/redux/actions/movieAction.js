@@ -47,21 +47,24 @@ function getMovieDetail(id) {
 
       const movieReviewsApi = api.get(`/movie/${id}/reviews?language=en-US`);
 
-      let [movieDetail, movieReivews] = await Promise.all([
+      let [movieDetail, movieReviews] = await Promise.all([
         movieDetailApi,
         movieReviewsApi,
       ]);
+
+      console.log("!!!!!!!!movieDetail : ", movieDetail);
+      console.log("!!!!!!!!movieReviews : ", movieReviews);
 
       dispatch({
         type: "GET_MOVIE_DETAIL_SUCCESS",
         payload: {
           movieDetail: movieDetail.data,
-          movieReivews: movieReivews.data,
+          movieReviews: movieReviews.data,
         },
       });
 
       console.log("!!!!!movieDetail : ", movieDetail);
-      console.log("!!!!!movieReviews : ", movieReivews);
+      console.log("!!!!!movieReviews : ", movieReviews);
     } catch (error) {
       dispatch({ type: "GET_MOVIE_DETAIL_FAILURE" });
       console.log("error : ", error);
