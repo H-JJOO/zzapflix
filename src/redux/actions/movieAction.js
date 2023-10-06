@@ -45,17 +45,23 @@ function getMovieDetail(id) {
       dispatch({ type: "GET_MOVIE_DETAIL_REQUEST" });
       const movieDetailApi = api.get(`/movie/${id}?language=en-US`);
 
-      let [movieDetail] = await Promise.all([movieDetailApi]);
+      const movieReviewsApi = api.get(`/movie/${id}/reviews?language=en-US`);
 
-      console.log("movieDetail : ", movieDetail);
+      let [movieDetail, movieReivews] = await Promise.all([
+        movieDetailApi,
+        movieReviewsApi,
+      ]);
 
       dispatch({
         type: "GET_MOVIE_DETAIL_SUCCESS",
         payload: {
           movieDetail: movieDetail.data,
+          movieReivews: movieReivews.data,
         },
       });
-      console.log("movieDetail : ", movieDetail);
+
+      console.log("!!!!!movieDetail : ", movieDetail);
+      console.log("!!!!!movieReviews : ", movieReivews);
     } catch (error) {
       dispatch({ type: "GET_MOVIE_DETAIL_FAILURE" });
       console.log("error : ", error);

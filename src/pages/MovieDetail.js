@@ -12,15 +12,20 @@ import { Container, Row, Col } from "react-bootstrap";
 
 const MovieDetail = () => {
   const genreList = gener.genres;
-  console.log("Detail genreList : ", genreList);
+
   const { id } = useParams();
 
   const dispatch = useDispatch();
-  const { movieDetail, loading } = useSelector((state) => state.movie);
+  const { movieDetail, movieReviews, loading } = useSelector(
+    (state) => state.movie
+  );
 
   useEffect(() => {
     dispatch(movieAction.getMovieDetail(id));
   }, []);
+
+  console.log("!!!movieDetail : ", movieDetail);
+  console.log("!!!movieReviews : ", movieReviews);
 
   if (loading) {
     return <ClipLoader color={"#ffff"} loading={loading} size={150} />;
@@ -93,6 +98,9 @@ const MovieDetail = () => {
             </div>
           </div>
           <hr style={{ color: "white" }} />
+        </Col>
+        <Col xs={12} xl={12}>
+          TEST
         </Col>
       </Row>
     </Container>
