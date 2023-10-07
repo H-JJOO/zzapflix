@@ -10,30 +10,6 @@ import gener from "../json/genreKey.json";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
 
-import Carousel from "react-multi-carousel";
-
-import MovieCard from "../components/MovieCard";
-
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5,
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 5,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
-};
-
 const MovieDetail = () => {
   const genreList = gener.genres;
 
@@ -117,10 +93,6 @@ const MovieDetail = () => {
               <Badge bg="danger">Release Date</Badge>
               {movieDetail.release_date}
             </div>
-            <div>
-              <Badge bg="danger">Runtime</Badge>
-              {movieDetail.runtime} min
-            </div>
           </div>
           <hr style={{ color: "white" }} />
         </Col>
@@ -128,8 +100,9 @@ const MovieDetail = () => {
           xs={12}
           xl={12}
           style={{ marginTop: "20px", marginBottom: "20px" }}>
-          <Button variant="danger">REVIEWS</Button>{" "}
-          <Button variant="light">RELATED MOVIES</Button>{" "}
+          <Badge bg="danger" style={{ width: "100%", height: "100%" }}>
+            REVIEWS ({movieReviews && movieReviews.total_results})
+          </Badge>
         </Col>
         <Col xs={12} xl={12} className="reviews-box">
           {movieReviews.results &&
@@ -143,29 +116,32 @@ const MovieDetail = () => {
               );
             })}
         </Col>
+        <Col
+          xs={12}
+          xl={12}
+          style={{ marginTop: "20px", marginBottom: "20px" }}>
+          <Badge bg="danger" style={{ width: "100%", height: "100%" }}>
+            RELATED MOVIES (
+            {relatedMovies.results && relatedMovies.results.length})
+          </Badge>
+        </Col>
         <Col xs={12} xl={12} className="relatedMovies-box">
-          <Carousel responsive={responsive}>
-            {relatedMovies.results &&
-              relatedMovies.results.map((item) => {
-                return (
-                  <div>
-                    <img
-                      src={`https://image.tmdb.org/t/p/w220_and_h330_face${item.backdrop_path}`}
-                    />
-                  </div>
-                );
-              })}
-          </Carousel>
+          {relatedMovies.results &&
+            relatedMovies.results.map((item) => {
+              return (
+                <div className="relatedMovie">
+                  <h3>{item.title}</h3>
+                  <img
+                    style={{ width: "298px", height: "400px" }}
+                    src={`https://image.tmdb.org/t/p/w220_and_h330_face${item.backdrop_path}`}
+                  />
+                </div>
+              );
+            })}
         </Col>
       </Row>
     </Container>
   );
 };
-
-{
-  /* <img
-  src={`https://image.tmdb.org/t/p/w220_and_h330_face${item.backdrop_path}`}
-/>; */
-}
 
 export default MovieDetail;

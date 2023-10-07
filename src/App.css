@@ -120,3 +120,19 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
+.relatedMovies-box > div > h3 {
+  color: white;
+  width: 300px;
+}
+
+.relatedMovie {
+  margin: 20px;
+  width: 300px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: black;
+  border: 1px solid white;
+}
+
+
