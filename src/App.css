@@ -113,3 +113,10 @@
 .reviews-box {
   border: 1px solid white;
 }
+
+.relatedMovies-box {
+  border: 1px solid white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}

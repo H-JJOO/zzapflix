@@ -10,13 +10,37 @@ import gener from "../json/genreKey.json";
 
 import { Container, Row, Col, Button } from "react-bootstrap";
 
+import Carousel from "react-multi-carousel";
+
+import MovieCard from "../components/MovieCard";
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 5,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
+
 const MovieDetail = () => {
   const genreList = gener.genres;
 
   const { id } = useParams();
 
   const dispatch = useDispatch();
-  const { movieDetail, movieReviews, loading } = useSelector(
+  const { movieDetail, movieReviews, relatedMovies, loading } = useSelector(
     (state) => state.movie
   );
 
@@ -30,6 +54,7 @@ const MovieDetail = () => {
 
   console.log("!!!movieDetail : ", movieDetail);
   console.log("!!!movieReviews : ", movieReviews);
+  console.log("!!!relatedMovies : ", relatedMovies);
 
   return (
     <Container className="detail">
@@ -118,9 +143,29 @@ const MovieDetail = () => {
               );
             })}
         </Col>
+        <Col xs={12} xl={12} className="relatedMovies-box">
+          <Carousel responsive={responsive}>
+            {relatedMovies.results &&
+              relatedMovies.results.map((item) => {
+                return (
+                  <div>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w220_and_h330_face${item.backdrop_path}`}
+                    />
+                  </div>
+                );
+              })}
+          </Carousel>
+        </Col>
       </Row>
     </Container>
   );
 };
+
+{
+  /* <img
+  src={`https://image.tmdb.org/t/p/w220_and_h330_face${item.backdrop_path}`}
+/>; */
+}
 
 export default MovieDetail;
