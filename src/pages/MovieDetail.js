@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Badge from "react-bootstrap/Badge";
 
 import { useParams } from "react-router-dom";
@@ -8,17 +8,44 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 import gener from "../json/genreKey.json";
 
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Modal } from "react-bootstrap";
+
+import YouTube, { YouTubeProps } from "react-youtube";
 
 const MovieDetail = () => {
+  // Modal
+  const values = [true];
+  const [fullscreen, setFullscreen] = useState(true);
+  const [show, setShow] = useState(false);
+
+  function handleShow(breakpoint) {
+    setFullscreen(breakpoint);
+    setShow(true);
+  }
+
+  // Youtube
+  const onPlayerReady: YouTubeProps["onReady"] = (event) => {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo();
+  };
+
+  const opts: YouTubeProps["opts"] = {
+    height: "390",
+    width: "640",
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+  };
+
+  // Genre(json파일)
   const genreList = gener.genres;
 
   const { id } = useParams();
 
   const dispatch = useDispatch();
-  const { movieDetail, movieReviews, relatedMovies, loading } = useSelector(
-    (state) => state.movie
-  );
+  const { movieDetail, movieReviews, relatedMovies, movieTrailer, loading } =
+    useSelector((state) => state.movie);
 
   useEffect(() => {
     dispatch(movieAction.getMovieDetail(id));
@@ -31,6 +58,7 @@ const MovieDetail = () => {
   console.log("!!!movieDetail : ", movieDetail);
   console.log("!!!movieReviews : ", movieReviews);
   console.log("!!!relatedMovies : ", relatedMovies);
+  console.log("!!!movieTrailer : ", movieTrailer);
 
   return (
     <Container className="detail">
@@ -95,7 +123,36 @@ const MovieDetail = () => {
             </div>
           </div>
           <hr style={{ color: "white" }} />
+          <div>
+            {values.map((v, idx) => (
+              <Button
+                key={idx}
+                className="me-2 mb-2"
+                onClick={() => handleShow(v)}>
+                Watch Trailer
+                {typeof v === "string" && `below ${v.split("-")[0]}`}
+              </Button>
+            ))}
+            <Modal
+              show={show}
+              fullscreen={fullscreen}
+              onHide={() => setShow(false)}>
+              <Modal.Header closeButton style={{ background: "black" }}>
+                <Modal.Title style={{ color: "white" }}>
+                  {movieDetail.title}
+                </Modal.Title>
+              </Modal.Header>
+              <Modal.Body style={{ background: "black" }}>
+                <YouTube
+                  videoId={movieTrailer.results && movieTrailer.results[0].key}
+                  opts={opts}
+                  onReady={onPlayerReady}
+                />
+              </Modal.Body>
+            </Modal>
+          </div>
         </Col>
+
         <Col
           xs={12}
           xl={12}

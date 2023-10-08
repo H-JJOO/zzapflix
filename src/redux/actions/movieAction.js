@@ -49,15 +49,19 @@ function getMovieDetail(id) {
 
       const relatedMoviesApi = api.get(`/movie/${id}/similar?language=en-US`);
 
-      let [movieDetail, movieReviews, relatedMovies] = await Promise.all([
+      const movieTrailerApi = api.get(`/movie/${id}/videos?language=en-US`);
+
+      let [movieDetail, movieReviews, relatedMovies, movieTrailer] = await Promise.all([
         movieDetailApi,
         movieReviewsApi,
         relatedMoviesApi,
+        movieTrailerApi
       ]);
 
       console.log("!!!!!!!!movieDetail : ", movieDetail);
       console.log("!!!!!!!!movieReviews : ", movieReviews);
       console.log("!!!!!!!!relatedMovies : ", relatedMovies);
+      console.log("!!!!!!!!movieTrailer : ", movieTrailer);
 
       dispatch({
         type: "GET_MOVIE_DETAIL_SUCCESS",
@@ -65,6 +69,7 @@ function getMovieDetail(id) {
           movieDetail: movieDetail.data,
           movieReviews: movieReviews.data,
           relatedMovies: relatedMovies.data,
+          movieTrailer: movieTrailer.data
         },
       });
     } catch (error) {
