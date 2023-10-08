@@ -30,8 +30,8 @@ const MovieDetail = () => {
   };
 
   const opts: YouTubeProps["opts"] = {
-    height: "390",
-    width: "640",
+    height: "700px",
+    width: "100%",
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
       autoplay: 1,
@@ -137,7 +137,7 @@ const MovieDetail = () => {
               show={show}
               fullscreen={fullscreen}
               onHide={() => setShow(false)}>
-              <Modal.Header closeButton style={{ background: "black" }}>
+              <Modal.Header closeButton style={{ background: "#dc3545" }}>
                 <Modal.Title style={{ color: "white" }}>
                   {movieDetail.title}
                 </Modal.Title>
