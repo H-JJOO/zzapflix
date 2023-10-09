@@ -134,3 +134,8 @@
   background-color: black;
   border: 1px solid white;
 }
+
+.movie-card {
+  display: flex;
+  flex-wrap: wrap;
+}

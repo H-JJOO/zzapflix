@@ -51,12 +51,13 @@ function getMovieDetail(id) {
 
       const movieTrailerApi = api.get(`/movie/${id}/videos?language=en-US`);
 
-      let [movieDetail, movieReviews, relatedMovies, movieTrailer] = await Promise.all([
-        movieDetailApi,
-        movieReviewsApi,
-        relatedMoviesApi,
-        movieTrailerApi
-      ]);
+      let [movieDetail, movieReviews, relatedMovies, movieTrailer] =
+        await Promise.all([
+          movieDetailApi,
+          movieReviewsApi,
+          relatedMoviesApi,
+          movieTrailerApi,
+        ]);
 
       console.log("!!!!!!!!movieDetail : ", movieDetail);
       console.log("!!!!!!!!movieReviews : ", movieReviews);
@@ -69,7 +70,7 @@ function getMovieDetail(id) {
           movieDetail: movieDetail.data,
           movieReviews: movieReviews.data,
           relatedMovies: relatedMovies.data,
-          movieTrailer: movieTrailer.data
+          movieTrailer: movieTrailer.data,
         },
       });
     } catch (error) {
@@ -79,7 +80,40 @@ function getMovieDetail(id) {
   };
 }
 
+// function getPopularMovies() {
+//   return async (dispatch) => {
+//     try {
+//       dispatch({ type: "GET_MOVIES_REQUEST" });
+//       const popularMoviesApi = api.get(`/movie/popular?language=en-US&page=1`);
+
+//       const genreKey = await api.get(`/genre/movie/list?language=en-US`);
+
+//       // 동시에 여러개의 api를 호출하고 싶을 때
+//       let [popularMovies, genreList] = await Promise.all([
+//         popularMoviesApi,
+//         genreKey,
+//       ]);
+
+//       dispatch({
+//         type: "GET_MOVIES_SUCCESS",
+//         payload: {
+//           popularMovies: popularMovies.data,
+//           genreList: genreList.data.genres,
+//         },
+//       });
+//       console.log("popularMovies : ", popularMovies);
+//       // console.log(topRatedMovies);
+//       // console.log(upcomingMovies);
+//     } catch (error) {
+//       // 에러 핸들링
+//       console.log("error : ", error);
+//       dispatch({ type: "GET_MOVIES_FAILURE" });
+//     }
+//   };
+// }
+
 export const movieAction = {
   getMovies,
   getMovieDetail,
+  // getPopularMovies,
 };
