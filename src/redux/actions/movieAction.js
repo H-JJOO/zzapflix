@@ -28,7 +28,7 @@ function getMovies() {
           genreList: genreList.data.genres,
         },
       });
-      console.log("popularMovies : ", popularMovies);
+      // console.log("popularMovies : ", popularMovies);
       // console.log(topRatedMovies);
       // console.log(upcomingMovies);
     } catch (error) {
