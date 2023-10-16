@@ -11,7 +11,17 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 import ReactPaginate from "react-paginate";
 
+import { useLocation } from "react-router-dom";
+
 const Movies = () => {
+  const location = useLocation();
+
+  let query = new URLSearchParams(location.search);
+
+  const search = query.get("search");
+
+  console.log("search!@#!@# : ", search);
+
   const dispatch = useDispatch();
   const { popularMovies, genreList, loading } = useSelector(
     (state) => state.movie
@@ -95,26 +105,17 @@ const Movies = () => {
     <Container>
       <Row>
         <Col
-          style={{ paddingTop: "50px", height: "100%" }}
+          style={{
+            paddingTop: "50px",
+            height: "100%",
+            background: "black",
+            margin: "10px",
+            color: "white",
+          }}
           xs={10}
           md={3}
           lg={3}>
-          <Form.Select
-            aria-label="Default select example"
-            style={{ background: "black", margin: "10px", color: "white" }}>
-            <option>Sort</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </Form.Select>
-          <Form.Select
-            aria-label="Default select example"
-            style={{ background: "black", margin: "10px", color: "white" }}>
-            <option>Filter</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </Form.Select>
+          <h1>Top 20</h1>
         </Col>
         <Col className="movie-card">{displayUsers}</Col>
         <div className="pagenation">

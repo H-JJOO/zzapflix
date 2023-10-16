@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Navbar,
@@ -7,11 +7,18 @@ import {
   Button,
   Nav,
   NavDropdown,
+  Badge,
 } from "react-bootstrap";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navigateion = () => {
+  const [inputValue, setInputValue] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/movies?search=${inputValue}`);
+  };
   return (
     <Navbar expand="lg" variant="dark" bg="dark">
       <Container fluid>
@@ -34,14 +41,20 @@ const Navigateion = () => {
               Movies
             </Link>
           </Nav>
-          <Form className="d-flex">
+
+          <Form className="d-flex" onSubmit={handleSubmit}>
             <Form.Control
               type="search"
-              placeholder="Search"
+              placeholder="Search Movie"
               className="me-2"
               aria-label="Search"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
             />
-            <Button variant="danger">Search</Button>
+
+            <Badge bg="danger" style={{ fontSize: "20px" }}>
+              Enter
+            </Badge>
           </Form>
         </Navbar.Collapse>
       </Container>
