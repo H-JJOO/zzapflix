@@ -1,22 +1,16 @@
-import { useSearchParams } from "react-router-dom";
-
 import api from "../api";
 
-function useSearchParam() {
-  const [searchParams] = useSearchParams();
-  return searchParams.get("search");
-}
-
-function getMovies() {
+function getMovies(searchWord) {
   return async (dispatch) => {
     try {
+      console.log("searchWord : ", searchWord);
       dispatch({ type: "GET_MOVIES_REQUEST" });
 
       const popularMoviesApi = api.get(`/movie/popular?language=en-US&page=1`);
       const top_ratedApi = api.get(`/movie/top_rated?language=en-US&page=1`);
       const upcomingApi = api.get(`/movie/upcoming?language=en-US&page=1`);
       const searchApi = api.get(
-        `/search/movie?query=${useSearchParam}&language=en-US&page=1`
+        `/search/movie?query=${searchWord}&include_adult=false&language=en-US&page=1`
       );
 
       console.log("searchApi@@@@ : ", searchApi);
@@ -50,7 +44,7 @@ function getMovies() {
         },
       });
       console.log("popularMovies : ", popularMovies);
-      console.log("searchMovies : ", searchMovies);
+      console.log("searchMovies@@@@ : ", searchMovies);
       // console.log(topRatedMovies);
       // console.log(upcomingMovies);
     } catch (error) {
