@@ -23,7 +23,7 @@ const Movies = () => {
   console.log("search!@#!@# : ", search);
 
   const dispatch = useDispatch();
-  const { popularMovies, genreList, loading } = useSelector(
+  const { popularMovies, genreList, loading, searchMovies } = useSelector(
     (state) => state.movie
   );
 
@@ -32,9 +32,16 @@ const Movies = () => {
   const usersPerPage = 4; // 한 페이지에 보여줄 아이템 개수
   const pagesVisited = pageNumber * usersPerPage;
 
+  console.log("popularMovies!!!!! : ", popularMovies.results);
+  console.log("searchMovies!!!!! : ", searchMovies);
+
   // 이 부분은 실제 데이터로 대체되어야 합니다.
-  const mockData =
+  let mockData =
     popularMovies.results === undefined ? [] : popularMovies.results;
+
+  if (search) {
+    mockData = searchMovies.results;
+  }
 
   // 현재 보여줘야 할 아이템들만 선택합니다.
   const displayUsers = mockData
@@ -92,8 +99,8 @@ const Movies = () => {
 
   useEffect(() => {
     setCount(count + 1);
-    dispatch(movieAction.getMovies());
-  }, []);
+    dispatch(movieAction.getMovies(search));
+  }, [dispatch, search]);
 
   if (loading) {
     return <ClipLoader color={"#ffff"} loading={loading} size={150} />;
@@ -115,7 +122,16 @@ const Movies = () => {
           xs={10}
           md={3}
           lg={3}>
-          <h1>Top 20</h1>
+          {search ? (
+            <div>
+              <h1>Search Result</h1>
+              <h3>{search}</h3>
+            </div>
+          ) : (
+            <div>
+              <h1>Popular Movies</h1>
+            </div>
+          )}
         </Col>
         <Col className="movie-card">{displayUsers}</Col>
         <div className="pagenation">

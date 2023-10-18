@@ -23,7 +23,7 @@ function movieReducer(state = initalState, action) {
         topRatedMovies: payload.topRatedMovies,
         upcomingMovies: payload.upcomingMovies,
         genreList: payload.genreList,
-        searchMovies: payload.searchMovies.data,
+        searchMovies: payload.searchMovies,
         loading: false,
       };
     case "GET_MOVIES_FAILURE":

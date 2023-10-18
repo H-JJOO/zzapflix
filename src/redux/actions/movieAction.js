@@ -9,9 +9,13 @@ function getMovies(searchWord) {
       const popularMoviesApi = api.get(`/movie/popular?language=en-US&page=1`);
       const top_ratedApi = api.get(`/movie/top_rated?language=en-US&page=1`);
       const upcomingApi = api.get(`/movie/upcoming?language=en-US&page=1`);
-      const searchApi = api.get(
-        `/search/movie?query=${searchWord}&include_adult=false&language=en-US&page=1`
-      );
+      let searchApi = api.get(`/movie/popular?language=en-US&page=1`);
+
+      if (searchWord) {
+        searchApi = api.get(
+          `/search/movie?query=${searchWord}&include_adult=false&language=en-US&page=1`
+        );
+      }
 
       console.log("searchApi@@@@ : ", searchApi);
       console.log("popularMoviesApi@@@@ : ", popularMoviesApi);
@@ -29,7 +33,7 @@ function getMovies(searchWord) {
         popularMoviesApi,
         top_ratedApi,
         upcomingApi,
-        searchApi,
+        searchApi ? searchApi : popularMoviesApi,
         genreKey,
       ]);
 
@@ -44,7 +48,7 @@ function getMovies(searchWord) {
         },
       });
       console.log("popularMovies : ", popularMovies);
-      console.log("searchMovies@@@@ : ", searchMovies);
+      console.log("searchMovies@@@@ : ", searchMovies.data);
       // console.log(topRatedMovies);
       // console.log(upcomingMovies);
     } catch (error) {
