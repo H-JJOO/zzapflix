@@ -11,9 +11,13 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 import ReactPaginate from "react-paginate";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Movies = () => {
+  const navigate = useNavigate();
+  const movieDetail = (id) => {
+    navigate(`/movies/${id}`);
+  };
   const location = useLocation();
 
   let query = new URLSearchParams(location.search);
@@ -44,10 +48,16 @@ const Movies = () => {
   }
 
   // 현재 보여줘야 할 아이템들만 선택합니다.
+
   const displayUsers = mockData
     .slice(pagesVisited, pagesVisited + usersPerPage)
     .map((item) => (
-      <Col style={{ paddingTop: "10px" }} className="movie-card">
+      <Col
+        style={{ paddingTop: "10px" }}
+        className="movie-card"
+        onClick={() => {
+          movieDetail(item.id);
+        }}>
         <Card style={{ width: "18rem", backgroundColor: "black" }}>
           <Card.Img
             variant="top"
@@ -124,12 +134,12 @@ const Movies = () => {
           lg={3}>
           {search ? (
             <div>
-              <h1>Search Result</h1>
+              <h2>| Search Result |</h2>
               <h3>{search}</h3>
             </div>
           ) : (
             <div>
-              <h1>Popular Movies</h1>
+              <h2>| Popular Movies |</h2>
             </div>
           )}
         </Col>

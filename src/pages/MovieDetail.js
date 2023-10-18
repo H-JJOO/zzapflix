@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Badge from "react-bootstrap/Badge";
 
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { movieAction } from "../redux/actions/movieAction";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -13,6 +13,13 @@ import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import YouTube, { YouTubeProps } from "react-youtube";
 
 const MovieDetail = () => {
+  const navigate = useNavigate();
+
+  const movie_detail = (id) => {
+    navigate(`/movies/${id}`);
+    window.location.reload();
+  };
+
   // Modal
   const values = [true];
   const [fullscreen, setFullscreen] = useState(true);
@@ -186,7 +193,11 @@ const MovieDetail = () => {
           {relatedMovies.results &&
             relatedMovies.results.map((item) => {
               return (
-                <div className="relatedMovie">
+                <div
+                  className="relatedMovie"
+                  onClick={() => {
+                    movie_detail(item.id);
+                  }}>
                   <h3>{item.title}</h3>
                   <img
                     style={{ width: "298px", height: "400px" }}
