@@ -24,7 +24,7 @@ const Movies = () => {
 
   const search = query.get("search");
 
-  console.log("search!@#!@# : ", search);
+  // console.log("search!@#!@# : ", search);
 
   const dispatch = useDispatch();
   const { popularMovies, genreList, loading, searchMovies } = useSelector(
@@ -36,8 +36,8 @@ const Movies = () => {
   const usersPerPage = 4; // 한 페이지에 보여줄 아이템 개수
   const pagesVisited = pageNumber * usersPerPage;
 
-  console.log("popularMovies!!!!! : ", popularMovies.results);
-  console.log("searchMovies!!!!! : ", searchMovies);
+  // console.log("popularMovies!!!!! : ", popularMovies.results);
+  // console.log("searchMovies!!!!! : ", searchMovies);
 
   // 이 부분은 실제 데이터로 대체되어야 합니다.
   let mockData =
@@ -116,7 +116,7 @@ const Movies = () => {
     return <ClipLoader color={"#ffff"} loading={loading} size={150} />;
   }
 
-  console.log("!!!!!!!!popularMovies : ", popularMovies.results);
+  // console.log("!!!!!!!!popularMovies : ", popularMovies.results);
 
   return (
     <Container>

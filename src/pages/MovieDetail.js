@@ -62,10 +62,10 @@ const MovieDetail = () => {
     return <ClipLoader color={"#ffff"} loading={loading} size={150} />;
   }
 
-  console.log("!!!movieDetail : ", movieDetail);
-  console.log("!!!movieReviews : ", movieReviews);
-  console.log("!!!relatedMovies : ", relatedMovies);
-  console.log("!!!movieTrailer : ", movieTrailer);
+  // console.log("!!!movieDetail : ", movieDetail);
+  // console.log("!!!movieReviews : ", movieReviews);
+  // console.log("!!!relatedMovies : ", relatedMovies);
+  // console.log("!!!movieTrailer : ", movieTrailer);
 
   return (
     <Container className="detail">

@@ -9,6 +9,8 @@ import MovieDetail from "./pages/MovieDetail";
 
 import Navigateion from "./components/Navigateion";
 
+import Footer from "./components/Footer";
+
 // 해야 할 것들
 // 1. 3개 페이지 필요 (홈페이지, movie 페이지, movieDetail 페이지)
 
@@ -36,6 +38,7 @@ function App() {
         <Route path="/movies" element={<Movies />} />
         <Route path="/movies/:id" element={<MovieDetail />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

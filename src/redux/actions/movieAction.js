@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function getMovies(searchWord) {
   return async (dispatch) => {
     try {
-      console.log("searchWord : ", searchWord);
+      // console.log("searchWord : ", searchWord);
       dispatch({ type: "GET_MOVIES_REQUEST" });
 
       const popularMoviesApi = api.get(`/movie/popular?language=en-US&page=1`);
@@ -19,8 +19,8 @@ function getMovies(searchWord) {
         );
       }
 
-      console.log("searchApi@@@@ : ", searchApi);
-      console.log("popularMoviesApi@@@@ : ", popularMoviesApi);
+      // console.log("searchApi@@@@ : ", searchApi);
+      // console.log("popularMoviesApi@@@@ : ", popularMoviesApi);
 
       const genreKey = await api.get(`/genre/movie/list?language=en-US`);
 
@@ -49,8 +49,8 @@ function getMovies(searchWord) {
           genreList: genreList.data.genres,
         },
       });
-      console.log("popularMovies : ", popularMovies);
-      console.log("searchMovies@@@@ : ", searchMovies.data);
+      // console.log("popularMovies : ", popularMovies);
+      // console.log("searchMovies@@@@ : ", searchMovies.data);
       // console.log(topRatedMovies);
       // console.log(upcomingMovies);
     } catch (error) {
@@ -81,10 +81,10 @@ function getMovieDetail(id) {
           movieTrailerApi,
         ]);
 
-      console.log("!!!!!!!!movieDetail : ", movieDetail);
-      console.log("!!!!!!!!movieReviews : ", movieReviews);
-      console.log("!!!!!!!!relatedMovies : ", relatedMovies);
-      console.log("!!!!!!!!movieTrailer : ", movieTrailer);
+      // console.log("!!!!!!!!movieDetail : ", movieDetail);
+      // console.log("!!!!!!!!movieReviews : ", movieReviews);
+      // console.log("!!!!!!!!relatedMovies : ", relatedMovies);
+      // console.log("!!!!!!!!movieTrailer : ", movieTrailer);
 
       dispatch({
         type: "GET_MOVIE_DETAIL_SUCCESS",
