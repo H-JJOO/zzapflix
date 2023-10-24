@@ -5,7 +5,8 @@ const api = axios.create({
 
   headers: {
     accept: "application/json",
-    Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
+    Authorization: `Bearer ${accessToken}`,
+    //Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
   },
 });
 
