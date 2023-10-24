@@ -12,6 +12,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import ReactPaginate from "react-paginate";
 
 import { useLocation, useNavigate } from "react-router-dom";
+import { key } from "localforage";
 
 const Movies = () => {
   const navigate = useNavigate();
@@ -45,6 +46,11 @@ const Movies = () => {
 
   if (search) {
     mockData = searchMovies.results;
+  }
+
+  if (mockData === undefined) {
+    mockData = [(key = "")];
+    alert("검색 결과가 없습니다.");
   }
 
   // 현재 보여줘야 할 아이템들만 선택합니다.
@@ -113,7 +119,11 @@ const Movies = () => {
   }, [dispatch, search]);
 
   if (loading) {
-    return <ClipLoader color={"#ffff"} loading={loading} size={150} />;
+    return (
+      <div className="loader-container">
+        <ClipLoader color={"#ffff"} loading={loading} size={150} />
+      </div>
+    );
   }
 
   // console.log("!!!!!!!!popularMovies : ", popularMovies.results);

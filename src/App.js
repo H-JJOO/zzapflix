@@ -27,9 +27,6 @@ import Footer from "./components/Footer";
 // 11. 영화 정렬 가능
 // 12. 영화 필터링 가능
 function App() {
-  window.onbeforeunload = function () {
-    return false;
-  };
   return (
     <div className="background">
       <Navigateion />

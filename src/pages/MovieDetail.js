@@ -56,10 +56,15 @@ const MovieDetail = () => {
 
   useEffect(() => {
     dispatch(movieAction.getMovieDetail(id));
+    window.scrollTo(0, 0);
   }, []);
 
   if (loading) {
-    return <ClipLoader color={"#ffff"} loading={loading} size={150} />;
+    return (
+      <div className="loader-container">
+        <ClipLoader color={"#ffff"} loading={loading} size={150} />
+      </div>
+    );
   }
 
   // console.log("!!!movieDetail : ", movieDetail);
@@ -151,7 +156,9 @@ const MovieDetail = () => {
               </Modal.Header>
               <Modal.Body style={{ background: "black" }}>
                 <YouTube
-                  videoId={movieTrailer.results && movieTrailer.results[0].key}
+                  videoId={
+                    movieTrailer.results ? movieTrailer.results[0].key : ""
+                  }
                   opts={opts}
                   onReady={onPlayerReady}
                 />

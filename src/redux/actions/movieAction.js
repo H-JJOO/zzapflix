@@ -1,7 +1,5 @@
 import api from "../api";
 
-import { useNavigate } from "react-router-dom";
-
 function getMovies(searchWord) {
   return async (dispatch) => {
     try {
@@ -57,6 +55,7 @@ function getMovies(searchWord) {
       // 에러 핸들링
       console.log("error : ", error);
       dispatch({ type: "GET_MOVIES_FAILURE" });
+      alert("영화 목록을 불러오는데 실패했습니다.");
     }
   };
 }
@@ -98,6 +97,7 @@ function getMovieDetail(id) {
     } catch (error) {
       dispatch({ type: "GET_MOVIE_DETAIL_FAILURE" });
       console.log("error : ", error);
+      alert("영화 목록을 불러오는데 실패했습니다.");
     }
   };
 }

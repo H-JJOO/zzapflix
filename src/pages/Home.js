@@ -24,7 +24,11 @@ const Home = () => {
   // false : 데이터 도착 후 or 에러 발생 (movieAction.js 에서 dispatch를 통해 데이터를 가져온 후)
 
   if (loading) {
-    return <ClipLoader color={"#ffff"} loading={loading} size={150} />;
+    return (
+      <div className="loader-container">
+        <ClipLoader color={"#ffff"} loading={loading} size={150} />
+      </div>
+    );
   }
 
   return (
