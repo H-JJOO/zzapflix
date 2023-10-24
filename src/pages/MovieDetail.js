@@ -13,11 +13,8 @@ import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import YouTube, { YouTubeProps } from "react-youtube";
 
 const MovieDetail = () => {
-  const navigate = useNavigate();
-
   const movie_detail = (id) => {
-    navigate(`/movies/${id}`);
-    window.location.reload();
+    window.open(`https://www.themoviedb.org/movie/${id}`, "_blank");
   };
 
   // Modal
